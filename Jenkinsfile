@@ -1,24 +1,14 @@
 pipeline{
-    agent any
-
-    tools{
-        maven 'Maven'
-    }
-    
+    agent any 
     stages{
         stage("Clone repository"){
             steps{
-                script{
-                    git 'https://github.com/ananthvamsi555/DevOps.git'
-                }
+                git 'https://github.com/ananthvamsi555/DevOps.git'
             }
         }
         stage("Build"){
             steps{
-                script{
-                    sh 'mvn clean package'
-
-                }
+                bat 'mvn clean package'
             }
         }
     }
