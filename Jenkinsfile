@@ -1,15 +1,9 @@
-pipeline {
+pipeline{
     agent any
-    stages {
-        stage('Step 1') {
-            steps {
-                echo "Hello"
-            }
-        }
-        stage('Step 2') {
-            steps {
-                echo "Adam"
-            }
+    stages{
+
+        stage("Git clone"){
+            git clone "https://github.com/ananthvamsi555/DevOps.git"
         }
     }
 }
