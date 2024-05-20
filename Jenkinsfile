@@ -4,7 +4,7 @@ pipeline{
     stages{
         stage("Clone repository"){
             steps{
-                sciprt{
+                script{
                     git 'https://github.com/ananthvamsi555/DevOps.git'
                 }
             }
