@@ -6,6 +6,12 @@ pipeline {
     }
 
     stages {
+        Stage("Clean old WS"){
+            steps{
+                // Clean the workspace after build
+                cleanWs()
+            }
+        }
         stage("Clone repository") {
             steps {
                 // Clone the Git repository
@@ -34,8 +40,6 @@ pipeline {
             // Publish JUnit test results, if they exist
             junit '**/target/surefire-reports/*.xml'
             
-            // Clean the workspace after build
-            cleanWs()
         }
     }
 }
