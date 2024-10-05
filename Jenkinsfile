@@ -15,7 +15,7 @@ pipeline {
         stage("Build") {
             steps {
                 script {
-                    bat 'mvn clean package'  // For Windows agents
+                    bat 'mvn clean test'  // For Windows agents
                     // sh 'mvn clean package'  // For Unix-based agents
                 }
             }
