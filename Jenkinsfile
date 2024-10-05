@@ -40,9 +40,6 @@ pipeline {
                 keepAll: true,
                 allowMissing: false
             ])
-            
-            // Clean the workspace after build
-            cleanWs()
         }
     }
 }
