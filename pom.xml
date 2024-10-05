@@ -12,16 +12,25 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <jackson-dataformat-yaml.version>2.14.2</jackson-dataformat-yaml.version>
+        <junit-jupiter-api.version>5.9.2</junit-jupiter-api.version>
         <junit-jupiter-params.version>5.9.2</junit-jupiter-params.version>
     </properties>
 
     <dependencies>
+        <!-- Jackson YAML support -->
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>${jackson-dataformat-yaml.version}</version>
         </dependency>
 
+        <!-- JUnit 5 (Jupiter) API and Params for parameterized tests -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter-api.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
@@ -29,4 +38,35 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Surefire Plugin to run tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <useFile>false</useFile> <!-- Show test output in console -->
+                    <forkCount>1</forkCount> <!-- Set to 1 to use a single JVM for tests -->
+                    <reuseForks>true</reuseForks> <!-- Reuse forks between tests -->
+                    <argLine>-Dtest=**/Test*.java</argLine> <!-- Optionally filter which tests to run -->
+                </configuration>
+            </plugin>
+
+            <!-- Surefire Report Plugin to generate HTML test reports -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.22.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>report</goal> <!-- Generates the HTML report -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
