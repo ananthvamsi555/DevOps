@@ -15,7 +15,7 @@ pipeline {
         stage("Build") {
             steps {
                 script {
-                    bat 'mvn clean test'  // For Windows agents
+                    bat 'mvn clean package'  // For Windows agents
                     // sh 'mvn clean package'  // For Unix-based agents
                 }
             }
@@ -33,6 +33,7 @@ pipeline {
             junit '**/target/surefire-reports/*.xml'
             
             // Publish HTML reports (from Surefire Report Plugin)
+            /*
             publishHTML(target: [
                 reportName: 'Test Report',
                 reportDir: 'target/site', // Directory where HTML reports are generated
@@ -40,6 +41,7 @@ pipeline {
                 keepAll: true,
                 allowMissing: false
             ])
+            */
         }
     }
 }
