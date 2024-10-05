@@ -17,6 +17,10 @@ pipeline{
     }
 
       post {
+        success{
+            archiveArtifacts artifacts: 'First_Pipeline_Project/**'
+        }
+      
       always {
         junit '**/target/surefire-reports/*.xml'
         cleanWs()
