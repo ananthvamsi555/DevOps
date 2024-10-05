@@ -2,23 +2,21 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven' // This should reference the Maven installation in Jenkins
+        maven 'Maven'  // Reference to the Maven installation in Jenkins
     }
 
     stages {
         stage("Clone repository") {
             steps {
-                // Clone the Git repository
                 git 'https://github.com/ananthvamsi555/DevOps.git'
             }
         }
 
         stage("Build") {
             steps {
-                // Run Maven clean and package
                 script {
                     bat 'mvn clean package'  // For Windows agents
-                    // sh 'mvn clean package'  // Use this for Unix-based agents (Linux/macOS)
+                    // sh 'mvn clean package'  // For Unix-based agents
                 }
             }
         }
@@ -26,13 +24,25 @@ pipeline {
 
     post {
         success {
-            // Archive the artifacts if the build is successful
+            // Archive build artifacts
             archiveArtifacts artifacts: '**/target/**/*', allowEmptyArchive: true
         }
 
         always {
-            // Publish JUnit test results, if they exist
+            // Publish JUnit test results
             junit '**/target/surefire-reports/*.xml'
+            
+            // Publish HTML reports (from Surefire Report Plugin)
+            publishHTML(target: [
+                reportName: 'Test Report',
+                reportDir: 'target/site', // Directory where HTML reports are generated
+                reportFiles: 'index.html', // The main report file
+                keepAll: true,
+                allowMissing: false
+            ])
+            
+            // Clean the workspace after build
+            cleanWs()
         }
     }
 }
