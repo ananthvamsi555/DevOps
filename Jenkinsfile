@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage("Clone repository") {
             steps {
-                scm scmCheckout(REPO_URL,BRANCH_NAME)
+               scmCheckout(REPO_URL,BRANCH_NAME)
             }
         }
 
