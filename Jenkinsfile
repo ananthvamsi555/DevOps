@@ -4,6 +4,8 @@ pipeline {
     environment{
         REPO_URL = 'https://github.com/ananthvamsi555/DevOps.git'
         BRANCH_NAME = 'master'
+        MVN_GOALS = 'clean package'
+        POM_FILE = 'pom.xml'
     }
     tools {
         maven 'Maven'  // Reference to the Maven installation in Jenkins
@@ -19,8 +21,9 @@ pipeline {
         stage("Build") {
             steps {
                 script {
-                    bat 'mvn clean package'  // For Windows agents
+                    // bat 'mvn clean package'  // For Windows agents
                     // sh 'mvn clean package'  // For Unix-based agents
+                    mavenBuild(MVN_GOALS,POM_FILE)
                 }
             }
         }
