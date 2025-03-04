@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment{
-        URL = 'https://github.com/ananthvamsi555/DevOps.git'
-        BRANCH = 'master'
+        REPO_URL = 'https://github.com/ananthvamsi555/DevOps.git'
+        BRANCH_NAME = 'master'
     }
     tools {
         maven 'Maven'  // Reference to the Maven installation in Jenkins
