@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+    environment{
+        URL = 'https://github.com/ananthvamsi555/DevOps.git'
+        BRANCH = 'master'
+    }
     tools {
         maven 'Maven'  // Reference to the Maven installation in Jenkins
     }
@@ -8,7 +11,7 @@ pipeline {
     stages {
         stage("Clone repository") {
             steps {
-                git 'https://github.com/ananthvamsi555/DevOps.git'
+                scmCheckout(URL,BRANCH)
             }
         }
 
