@@ -1,6 +1,9 @@
 @Library('jenkins-shared-library') _
 pipeline {
     agent any
+    triggers {
+        githubPush()
+    }
     environment{
         REPO_URL = 'https://github.com/ananthvamsi555/DevOps.git'
         BRANCH_NAME = 'master'
