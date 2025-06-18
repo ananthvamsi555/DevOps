@@ -24,8 +24,6 @@ pipeline {
         stage("Build") {
             steps {
                 script {
-                    // bat 'mvn clean package'  // For Windows agents
-                    // sh 'mvn clean package'  // For Unix-based agents
                     mavenBuild(MVN_GOALS,POM_FILE)
                 }
             }
